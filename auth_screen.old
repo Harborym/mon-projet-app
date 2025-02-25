@@ -1,0 +1,107 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../services/firestore_service.dart';
+import '../services/google_auth_desktop.dart';
+
+class AuthScreen extends StatefulWidget {
+  final bool isYPM;
+  const AuthScreen({super.key, this.isYPM = false});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  Future<void> signInYPM() async {
+    try {
+      final userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      await FirestoreService().createOrGetUserEnvironment(
+          userCredential.user!,
+          'ypm'
+      );
+      Navigator.pushReplacementNamed(context, '/playlists');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erreur : $e')),
+      );
+    }
+  }
+
+  Future<void> signInGoogle() async {
+    try {
+      UserCredential userCredential;
+      if (kIsWeb || defaultTargetPlatform == TargetPlatform.windows) {
+        userCredential = (await GoogleAuthDesktop().signInWithGoogle())!;
+      } else {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        if (googleUser == null) return;
+        final googleAuth = await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        userCredential = await _auth.signInWithCredential(credential);
+      }
+
+      await FirestoreService().createOrGetUserEnvironment(
+          userCredential.user!,
+          'google'
+      );
+      Navigator.pushReplacementNamed(context, '/playlists');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erreur : $e')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: widget.isYPM ? Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: "Email",
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Mot de passe",
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: signInYPM,
+            child: const Text("Connexion YPM"),
+          ),
+        ],
+      ) : Center(
+        child: ElevatedButton(
+          onPressed: signInGoogle,
+          child: const Text("Se connecter avec Google"),
+        ),
+      ),
+    );
+  }
+}

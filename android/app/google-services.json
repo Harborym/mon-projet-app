@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "315559019098",
+    "project_id": "ypmanagement-2302",
+    "storage_bucket": "ypmanagement-2302.firebasestorage.app"
+  },
+
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315559019098:android:9bdec551ac424648a9ce63",
+        "android_client_info": {
+          "package_name": "com.app.ypm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315559019098-eboilu1st3vphoc43v9shf0m65gebk0s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.ypm",
+            "certificate_hash": "13583d45a246bcdadcbe9b1323fbe5536e9d87e6"
+          }
+        },
+        {
+          "client_id": "315559019098-0odqt6vlqhe48sh1buiku385tv2gljji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-E039C2I2-zo3i5x-eF4YonTYQxeBoVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315559019098-0odqt6vlqhe48sh1buiku385tv2gljji.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315559019098-iqgqmsteg6kec33pfvqbij3af4bulk7f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apple.ypm"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315559019098:android:040a5dae7a14f6e7a9ce63",
+        "android_client_info": {
+          "package_name": "com.example.youtubeplaylistmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315559019098-0odqt6vlqhe48sh1buiku385tv2gljji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-E039C2I2-zo3i5x-eF4YonTYQxeBoVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315559019098-0odqt6vlqhe48sh1buiku385tv2gljji.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "315559019098-iqgqmsteg6kec33pfvqbij3af4bulk7f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apple.ypm"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
